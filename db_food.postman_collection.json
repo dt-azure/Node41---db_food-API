@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "2af83d23-b116-4bdf-804f-35be87918398",
+		"name": "db_food",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33109408"
+	},
+	"item": [
+		{
+			"name": "Get Like By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/restaurant/like/2",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"restaurant",
+						"like",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Like By User ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/restaurant/like-by/2",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"restaurant",
+						"like-by",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Restaurant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 10,\r\n    \"res_id\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/restaurant/like-res",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"restaurant",
+						"like-res"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dislike Restaurant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 10,\r\n    \"res_id\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/restaurant/dislike-res",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"restaurant",
+						"dislike-res"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rating By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/restaurant/rate/2",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"restaurant",
+						"rate",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rating By User ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/restaurant/rate-by/5",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"restaurant",
+						"rate-by",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate Restaurant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 10,\r\n    \"res_id\": 10,\r\n    \"rating\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/restaurant/rate-res",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"restaurant",
+						"rate-res"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 3,\r\n    \"food_id\": 7,\r\n    \"amount\": 5,\r\n    \"arr_sub_id\": \"5,6,7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/order/place-order",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"order",
+						"place-order"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
