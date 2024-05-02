@@ -15,8 +15,8 @@ const resRouter = express.Router();
 // Like APIs
 resRouter.get("/like/:resId", getLikebyId);
 resRouter.get("/like-by/:userId", getLikebyUserId);
-resRouter.post("/like-res/resId", likeRes);
-resRouter.post("/dislike-res/resId", dislikeRes);
+resRouter.post("/like-res/:resId", likeRes);
+resRouter.post("/dislike-res/:resId", dislikeRes);
 
 // Like APIs with token check
 // resRouter.post("/like-res", verifyToken, likeRes);
