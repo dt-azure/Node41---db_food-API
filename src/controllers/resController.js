@@ -59,14 +59,14 @@ const getLikebyUserId = async (req, res) => {
 
 const likeRes = async (req, res) => {
   try {
-    const { res_id } = req.body;
+    const { resId } = req.params;
     const { token } = req.headers;
     const { data } = decodeToken(token);
 
     const checkLike = await model.like_res.findOne({
       where: {
         user_id: data.userId,
-        res_id,
+        res_id: resId,
       },
     });
 
@@ -75,7 +75,7 @@ const likeRes = async (req, res) => {
     } else {
       const newData = {
         user_id: data.userId,
-        res_id,
+        res_id: resId,
         date_like: new Date(),
         dislike: 0,
       };
@@ -91,14 +91,14 @@ const likeRes = async (req, res) => {
 
 const dislikeRes = async (req, res) => {
   try {
-    const { res_id } = req.body;
+    const { resId } = req.params;
     const { token } = req.headers;
     const { data } = decodeToken(token);
 
     const checkDislike = await model.like_res.findOne({
       where: {
         user_id: data.userId,
-        res_id,
+        res_id: resId,
       },
     });
 
