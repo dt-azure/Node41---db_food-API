@@ -1,17 +1,17 @@
 import initModels from "../models/init-models.js";
 import sequelize from "../models/connect.js";
 import { response } from "../config/response.js";
-
+import { decodeToken } from "../config/jwt.js";
 
 let model = initModels(sequelize);
 
 const getLikebyId = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { resId } = req.params;
 
     const data = await model.like_res.findAll({
       where: {
-        res_id: id,
+        res_id: resId,
       },
     });
 
@@ -23,11 +23,11 @@ const getLikebyId = async (req, res) => {
 
 const getLikebyUserId = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { userId } = req.params;
 
     const likeData = await model.like_res.findAll({
       where: {
-        user_id: id,
+        user_id: userId,
       },
       include: ["restaurant"],
     });
@@ -59,11 +59,13 @@ const getLikebyUserId = async (req, res) => {
 
 const likeRes = async (req, res) => {
   try {
-    const { user_id, res_id } = req.body;
+    const { res_id } = req.body;
+    const { token } = req.headers;
+    const { data } = decodeToken(token);
 
     const checkLike = await model.like_res.findOne({
       where: {
-        user_id,
+        user_id: data.userId,
         res_id,
       },
     });
@@ -72,7 +74,7 @@ const likeRes = async (req, res) => {
       checkLike.destroy();
     } else {
       const newData = {
-        user_id,
+        user_id: data.userId,
         res_id,
         date_like: new Date(),
         dislike: 0,
@@ -89,11 +91,13 @@ const likeRes = async (req, res) => {
 
 const dislikeRes = async (req, res) => {
   try {
-    const { user_id, res_id } = req.body;
+    const { res_id } = req.body;
+    const { token } = req.headers;
+    const { data } = decodeToken(token);
 
     const checkDislike = await model.like_res.findOne({
       where: {
-        user_id,
+        user_id: data.userId,
         res_id,
       },
     });
@@ -113,7 +117,7 @@ const dislikeRes = async (req, res) => {
       }
     } else {
       const newData = {
-        user_id,
+        user_id: data.userId,
         res_id,
         date_like: new Date(),
         dislike: 1,
@@ -130,11 +134,11 @@ const dislikeRes = async (req, res) => {
 
 const getRateById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { resId } = req.params;
 
     const data = await model.rate_res.findAll({
       where: {
-        res_id: id,
+        res_id: resId,
       },
     });
 
@@ -146,11 +150,11 @@ const getRateById = async (req, res) => {
 
 const getRateByUserId = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { userId } = req.params;
 
     const data = await model.rate_res.findAll({
       where: {
-        user_id: id,
+        user_id: userId,
       },
       include: ["restaurant"],
     });
@@ -163,11 +167,13 @@ const getRateByUserId = async (req, res) => {
 
 const rateRes = async (req, res) => {
   try {
-    const { user_id, res_id, rating } = req.body;
+    const { res_id, rating } = req.body;
+    const { token } = req.headers;
+    const { data } = decodeToken(token);
 
     const checkRate = await model.rate_res.findOne({
       where: {
-        user_id,
+        user_id: data.userId,
         res_id,
       },
     });
@@ -179,7 +185,7 @@ const rateRes = async (req, res) => {
       await checkRate.save();
     } else {
       const newData = {
-        user_id,
+        user_id: data.userId,
         res_id,
         amount: rating,
         date_rate: new Date(),
@@ -188,7 +194,12 @@ const rateRes = async (req, res) => {
       model.rate_res.create(newData);
     }
 
-    response(res, checkRate ? "Rating Updated" : "Rating Added", "Success", 200);
+    response(
+      res,
+      checkRate ? "Rating Updated" : "Rating Added",
+      "Success",
+      200
+    );
   } catch (error) {
     response(res, "", "Error occurred.", 500);
   }

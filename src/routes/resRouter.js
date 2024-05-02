@@ -13,8 +13,8 @@ import { verifyToken } from "../config/jwt.js";
 const resRouter = express.Router();
 
 // Like APIs
-resRouter.get("/like/:id", getLikebyId);
-resRouter.get("/like-by/:id", getLikebyUserId);
+resRouter.get("/like/:resId", getLikebyId);
+resRouter.get("/like-by/:userId", getLikebyUserId);
 resRouter.post("/like-res", likeRes);
 resRouter.post("/dislike-res", dislikeRes);
 
@@ -23,8 +23,8 @@ resRouter.post("/dislike-res", dislikeRes);
 // resRouter.post("/dislike-res", verifyToken, dislikeRes);
 
 // Rating APIs
-resRouter.get("/rate/:id", getRateById);
-resRouter.get("/rate-by/:id", getRateByUserId);
+resRouter.get("/rate/:resId", getRateById);
+resRouter.get("/rate-by/:userId", getRateByUserId);
 resRouter.post("/rate-res", rateRes);
 
 // Rating APIs with token check
